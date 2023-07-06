@@ -1,14 +1,14 @@
 package com.stefandragomiroiu.rideshare.controller.dto.response;
 
-import com.stefandragomiroiu.rideshare.tables.pojos.Locations;
+import com.stefandragomiroiu.rideshare.tables.pojos.Location;
 
 import java.time.LocalDateTime;
 
 public class RideWithLocationsAndDriver {
     private Long rideId;
     private DriverAndAverageRatings driverAndAverageRatings;
-    private Locations departureLocation;
-    private Locations arrivalLocation;
+    private Location departureLocation;
+    private Location arrivalLocation;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private Integer price;
@@ -16,7 +16,7 @@ public class RideWithLocationsAndDriver {
     public RideWithLocationsAndDriver() {
     }
 
-    public RideWithLocationsAndDriver(Long rideId, DriverAndAverageRatings driverAndAverageRatings, Locations departureLocation, Locations arrivalLocation, LocalDateTime departureTime, LocalDateTime arrivalTime, Integer price) {
+    public RideWithLocationsAndDriver(Long rideId, DriverAndAverageRatings driverAndAverageRatings, Location departureLocation, Location arrivalLocation, LocalDateTime departureTime, LocalDateTime arrivalTime, Integer price) {
         this.rideId = rideId;
         this.driverAndAverageRatings = driverAndAverageRatings;
         this.departureLocation = departureLocation;
@@ -42,19 +42,19 @@ public class RideWithLocationsAndDriver {
         this.driverAndAverageRatings = driverAndAverageRatings;
     }
 
-    public Locations getDepartureLocation() {
+    public Location getDepartureLocation() {
         return departureLocation;
     }
 
-    public void setDepartureLocation(Locations departureLocation) {
+    public void setDepartureLocation(Location departureLocation) {
         this.departureLocation = departureLocation;
     }
 
-    public Locations getArrivalLocation() {
+    public Location getArrivalLocation() {
         return arrivalLocation;
     }
 
-    public void setArrivalLocation(Locations arrivalLocation) {
+    public void setArrivalLocation(Location arrivalLocation) {
         this.arrivalLocation = arrivalLocation;
     }
 

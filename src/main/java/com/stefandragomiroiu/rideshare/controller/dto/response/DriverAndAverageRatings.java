@@ -3,13 +3,13 @@ package com.stefandragomiroiu.rideshare.controller.dto.response;
 public class DriverAndAverageRatings {
     private Long userId;
     private String fullName;
-    private double averageRating;
-    private int numberOfRatings;
+    private Double averageRating;
+    private Integer numberOfRatings;
 
     public DriverAndAverageRatings() {
     }
 
-    public DriverAndAverageRatings(Long userId, String fullName, double averageRating, int numberOfRatings) {
+    public DriverAndAverageRatings(Long userId, String fullName, Double averageRating, Integer numberOfRatings) {
         this.userId = userId;
         this.fullName = fullName;
         this.averageRating = averageRating;
@@ -32,19 +32,19 @@ public class DriverAndAverageRatings {
         this.fullName = fullName;
     }
 
-    public double getAverageRating() {
+    public Double getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(double averageRating) {
+    public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
     }
 
-    public int getNumberOfRatings() {
+    public Integer getNumberOfRatings() {
         return numberOfRatings;
     }
 
-    public void setNumberOfRatings(int numberOfRatings) {
+    public void setNumberOfRatings(Integer numberOfRatings) {
         this.numberOfRatings = numberOfRatings;
     }
 }

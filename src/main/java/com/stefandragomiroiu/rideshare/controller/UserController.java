@@ -1,8 +1,8 @@
 package com.stefandragomiroiu.rideshare.controller;
 
 import com.stefandragomiroiu.rideshare.controller.exception.ResourceNotFoundException;
-import com.stefandragomiroiu.rideshare.tables.daos.UsersDao;
-import com.stefandragomiroiu.rideshare.tables.pojos.Users;
+import com.stefandragomiroiu.rideshare.tables.daos.UserDao;
+import com.stefandragomiroiu.rideshare.tables.pojos.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,33 +11,33 @@ import java.util.List;
 @CrossOrigin()
 @RestController
 @RequestMapping("/users")
-public class UsersController {
-    private final UsersDao usersDao;
+public class UserController {
+    private final UserDao usersDao;
 
-    public UsersController(UsersDao usersDao) {
-        this.usersDao = usersDao;
+    public UserController(UserDao userDao) {
+        this.usersDao = userDao;
     }
 
     @GetMapping
-    public List<Users> findAll() {
+    public List<User> findAll() {
         return usersDao.findAll();
     }
 
     @GetMapping("/{id}")
-    public Users findById(@PathVariable long id) {
+    public User findById(@PathVariable long id) {
         return usersDao.findOptionalById(id)
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody Users user) {
+    public void create(@RequestBody User user) {
         usersDao.insert(user);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable long id, @RequestBody Users user) {
+    public void update(@PathVariable long id, @RequestBody User user) {
         if (usersDao.findOptionalById(id).isEmpty()) {
             throw new ResourceNotFoundException();
         }

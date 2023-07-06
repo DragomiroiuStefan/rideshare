@@ -1,7 +1,7 @@
-INSERT INTO public.users (email, password, first_name, last_name, phone_number, birth_date, created_on, last_login)
+INSERT INTO public.user (email, password, first_name, last_name, phone_number, birth_date, created_on, last_login)
 VALUES ('firstuser@gmail.com', 'pass', 'first', 'user', '0722', '2003-06-05', '2023-06-19 14:11:20.367045', null);
 
-INSERT INTO public.locations (city, county) VALUES
+INSERT INTO public.location (city, county) VALUES
 ('Bucharest', 'Bucureşti'),
 ('Cluj-Napoca', 'Cluj'),
 ('Timişoara', 'Timiş'),
@@ -531,12 +531,12 @@ INSERT INTO public.locations (city, county) VALUES
 ('Vărăşti', 'Călăraşi'),
 ('Ileana', 'Călăraşi');
 
-INSERT INTO public.rides (driver, seats, additional_comment, posted_at) VALUES (1, 3, 'Nu se fumeaza in masina', '2023-06-19 14:35:54.075959');
-
-INSERT INTO public.ride_connections (departure_location, arrival_location, departure_time, arrival_time, departure_address, arrival_address, price, ride_id)
-VALUES (1, 2, '2023-06-19 17:36:43.000000', '2023-06-19 18:36:50.000000', null, null, 10, 1);
-INSERT INTO public.ride_connections (departure_location, arrival_location, departure_time, arrival_time, departure_address, arrival_address, price, ride_id)
-VALUES (2, 3, '2023-06-19 18:36:43.000000', '2023-06-19 19:36:50.000000', null, null, 10, 1);
-INSERT INTO public.ride_connections (departure_location, arrival_location, departure_time, arrival_time, departure_address, arrival_address, price, ride_id)
-VALUES (3, 4, '2023-06-19 19:36:43.000000', '2023-06-19 20:36:50.000000', null, null, 10, 1);
+-- INSERT INTO public.ride (driver, seats, additional_comment, posted_at) VALUES (1, 3, 'Nu se fumeaza in masina', '2023-06-19 14:35:54.075959');
+--
+-- INSERT INTO public.ride_connection (departure_location, arrival_location, departure_time, arrival_time, departure_address, arrival_address, price, ride_id)
+-- VALUES (1, 2, '2023-06-19 17:36:43.000000', '2023-06-19 18:36:50.000000', null, null, 10, 1);
+-- INSERT INTO public.ride_connection (departure_location, arrival_location, departure_time, arrival_time, departure_address, arrival_address, price, ride_id)
+-- VALUES (2, 3, '2023-06-19 18:36:43.000000', '2023-06-19 19:36:50.000000', null, null, 10, 1);
+-- INSERT INTO public.ride_connection (departure_location, arrival_location, departure_time, arrival_time, departure_address, arrival_address, price, ride_id)
+-- VALUES (3, 4, '2023-06-19 19:36:43.000000', '2023-06-19 20:36:50.000000', null, null, 10, 1);
 

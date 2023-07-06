@@ -1,6 +1,6 @@
 package com.stefandragomiroiu.rideshare.service;
 
-import com.stefandragomiroiu.rideshare.controller.dto.request.RideAndConnections;
+import com.stefandragomiroiu.rideshare.controller.dto.request.RideWithConnections;
 import com.stefandragomiroiu.rideshare.controller.dto.response.DriverAndAverageRatings;
 import com.stefandragomiroiu.rideshare.controller.dto.response.RideWithLocationsAndDriver;
 import com.stefandragomiroiu.rideshare.repository.LocationRepository;
@@ -10,19 +10,20 @@ import com.stefandragomiroiu.rideshare.repository.UserRepository;
 import com.stefandragomiroiu.rideshare.repository.dto.DriverRating;
 import com.stefandragomiroiu.rideshare.repository.dto.RideConnectionWithAvailableSeats;
 import com.stefandragomiroiu.rideshare.repository.dto.RideWithDepartureArrivalTimes;
-import com.stefandragomiroiu.rideshare.tables.pojos.Locations;
-import com.stefandragomiroiu.rideshare.tables.pojos.RideConnections;
-import com.stefandragomiroiu.rideshare.tables.pojos.Rides;
-import com.stefandragomiroiu.rideshare.tables.pojos.Users;
+import com.stefandragomiroiu.rideshare.tables.pojos.Location;
+import com.stefandragomiroiu.rideshare.tables.pojos.RideConnection;
+import com.stefandragomiroiu.rideshare.tables.pojos.Ride;
+import com.stefandragomiroiu.rideshare.tables.pojos.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RidesService {
+public class RideService {
 
     private final RideConnectionsRepository rideConnectionsRepository;
     private final RidesRepository ridesRepository;
@@ -30,7 +31,7 @@ public class RidesService {
 
     private final LocationRepository locationRepository;
 
-    public RidesService(RideConnectionsRepository rideConnectionsRepository, RidesRepository ridesRepository, UserRepository userRepository, LocationRepository locationRepository) {
+    public RideService(RideConnectionsRepository rideConnectionsRepository, RidesRepository ridesRepository, UserRepository userRepository, LocationRepository locationRepository) {
         this.rideConnectionsRepository = rideConnectionsRepository;
         this.ridesRepository = ridesRepository;
         this.userRepository = userRepository;
@@ -38,9 +39,9 @@ public class RidesService {
     }
 
     public List<RideWithLocationsAndDriver> findBy(Long departure, Long arrival, LocalDate date, Integer seats) {
-        Locations departureLocation = locationRepository.findOptionalById(departure)
+        Location departureLocation = locationRepository.findOptionalById(departure)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid departure location"));
-        Locations arrivalLocation = locationRepository.findOptionalById(arrival)
+        Location arrivalLocation = locationRepository.findOptionalById(arrival)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid arrival location"));
 
         List<RideWithLocationsAndDriver> result = new ArrayList<>();
@@ -56,7 +57,7 @@ public class RidesService {
             rideWithLocationsAndDriver.setArrivalLocation(arrivalLocation);
 
             // Set driver information to the dto
-            Users driver = userRepository.findById(ride.getDriver());
+            User driver = userRepository.findById(ride.getDriver());
             DriverRating driverRating = userRepository.findAverageRatingBy(ride.getDriver());
             rideWithLocationsAndDriver.setDriverAndAverageRatings(
                     new DriverAndAverageRatings(
@@ -89,17 +90,18 @@ public class RidesService {
     }
 
     @Transactional
-    public void create(RideAndConnections rideAndConnections) {
-        Rides rides = new Rides(
+    public void create(RideWithConnections rideWithConnections) {
+        Ride ride = new Ride(
                 null,
-                rideAndConnections.driver(),
-                rideAndConnections.seats(),
-                rideAndConnections.additionalComment(),
-                null
+                rideWithConnections.driver(),
+                rideWithConnections.vehicle(),
+                rideWithConnections.seats(),
+                rideWithConnections.additionalComment(),
+                LocalDateTime.now()
         );
-        ridesRepository.insert(rides);
-        for (RideConnections rideConnection : rideAndConnections.connections()) {
-            rideConnection.setRideId(rides.getRideId());
+        ridesRepository.insert(ride);
+        for (RideConnection rideConnection : rideWithConnections.connections()) {
+            rideConnection.setRideId(ride.getRideId());
             rideConnectionsRepository.insert(rideConnection);
         }
     }
