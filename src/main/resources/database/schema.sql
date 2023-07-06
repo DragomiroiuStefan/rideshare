@@ -12,7 +12,7 @@ create table users
     -- profile_picture
 );
 
-create table user_vehicles
+create table vehicles
 (
     plate_number      varchar(20) primary key,
     brand             varchar(50) not null,
@@ -34,6 +34,7 @@ create table rides
 (
     ride_id            bigint generated always as identity primary key,
     driver             bigint references users (user_id),
+    vehicle            bigint references vehicles (plate_number),
     seats              int not null,
     additional_comment varchar(255),
     posted_at          timestamp default now()
@@ -69,7 +70,7 @@ create table bookings
 (
     booking_id bigint generated always as identity primary key,
     user_id    bigint references users (user_id),
-    approved    boolean,
+    approved   boolean,
     booked_at  timestamp default now()
 );
 

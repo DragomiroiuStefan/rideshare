@@ -1,0 +1,35 @@
+### Find all
+GET {{host}}/users
+
+### Find by id
+GET {{host}}/users/3
+
+### Create
+POST {{host}}/users
+Content-Type: application/json
+
+{
+  "email": "seconduser@gmail.com",
+  "password": "pass",
+  "firstName": "second",
+  "lastName": "user",
+  "phoneNumber": "07223",
+  "birthDate": "2000-02-05"
+}
+
+### Update
+PUT {{host}}/users/2
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "email": "seconduser@gmail.com",
+  "password": "pass",
+  "firstName": "second",
+  "lastName": "user",
+  "phoneNumber": "0722333333",
+  "birthDate": "2000-02-05"
+}
+
+### Delete
+DELETE {{host}}/users/2

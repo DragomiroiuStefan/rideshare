@@ -84,7 +84,7 @@
                                 </database>
                                 <generate>
                                     <pojos>true</pojos>
-                                    <pojosAsJavaRecordClasses>true</pojosAsJavaRecordClasses>
+                                    <validationAnnotations>true</validationAnnotations>
                                     <javaTimeTypes>true</javaTimeTypes>
                                     <!-- Generate the DAO classes -->
                                     <daos>true</daos>

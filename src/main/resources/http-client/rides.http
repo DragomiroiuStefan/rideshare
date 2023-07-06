@@ -1,0 +1,59 @@
+### Find rides
+GET {{host}}/rides/findBy?departure=5&arrival=7&date=2023-06-27&seats=2
+Accept: application/json
+
+### Find by id
+GET {{host}}/rides/3
+Accept: application/json
+
+### Create
+POST {{host}}/rides
+Content-Type: application/json
+
+{
+  "driver": 1,
+  "seats": 4,
+  "additionalComment": "Nu se fumeaza in masina",
+  "connections": [
+    {
+      "departureLocation": 4,
+      "arrivalLocation": 5,
+      "departureTime": "2023-06-27T17:36:43.000000",
+      "arrivalTime": "2023-06-27T19:36:43.000000",
+      "departureAddress": "departure Address ...",
+      "price": 50
+    },
+    {
+      "departureLocation": 5,
+      "arrivalLocation": 6,
+      "departureTime": "2023-06-27T19:36:43.000000",
+      "arrivalTime": "2023-06-27T20:36:43.000000",
+      "price": 30
+    },
+    {
+      "departureLocation": 6,
+      "arrivalLocation": 7,
+      "departureTime": "2023-06-27T20:36:43.000000",
+      "arrivalTime": "2023-06-27T21:36:43.000000",
+      "arrivalAddress": "arrival Address ...",
+      "price": 40
+    }
+  ]
+}
+
+### Update
+PUT {{host}}/users/2
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "email": "seconduser@gmail.com",
+  "password": "pass",
+  "firstName": "second",
+  "lastName": "user",
+  "phoneNumber": "0722333333",
+  "birthDate": "2000-02-05"
+}
+
+### Delete
+DELETE {{host}}/users/2

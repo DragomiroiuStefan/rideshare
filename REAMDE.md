@@ -1,8 +1,11 @@
+# RideShare
+
 ## TODO
 
 - ride departure and arrival time timestamp
 - bookings with approval
 - flowcharts
+- rest exceptions handling
 - validation
 - rest documentation
 - testing
