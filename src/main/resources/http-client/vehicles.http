@@ -1,0 +1,35 @@
+### Find all
+GET {{host}}/vehicles?userId=1
+Accept: application/json
+
+### Find by id
+GET {{host}}/vehicles/ABC-123
+
+### Create
+POST {{host}}/vehicles
+Content-Type: application/json
+
+{
+  "plateNumber": "ABC-124",
+  "brand": "Audi",
+  "model": "A3",
+  "color": "Red",
+  "registrationYear":  2017,
+  "owner": 1
+}
+
+### Update
+PUT {{host}}/vehicles/ABC-124
+Content-Type: application/json
+
+{
+  "plateNumber": "ABC-124",
+  "brand": "Audi",
+  "model": "A3",
+  "color": "Red",
+  "registrationYear":  2017,
+  "owner": 1
+}
+
+### Delete
+DELETE {{host}}/vehicles/ABC-124

@@ -18,7 +18,7 @@ create table vehicle
     brand             varchar(50) not null,
     model             varchar(50) not null,
     color             varchar(50) not null,
-    registration_year date        not null,
+    registration_year integer     not null,
     -- picture
     owner             bigint references "user" (user_id)
 );
@@ -33,9 +33,9 @@ create table location
 create table ride
 (
     ride_id            bigint generated always as identity primary key,
-    driver             bigint references "user" (user_id) not null,
+    driver             bigint references "user" (user_id)            not null,
     vehicle            varchar(20) references vehicle (plate_number) not null,
-    seats              int not null,
+    seats              int                                           not null,
     additional_comment varchar(255),
     posted_at          timestamp default now()
     -- traseu selectat pe harta
