@@ -1,8 +1,8 @@
 package com.stefandragomiroiu.rideshare.controller;
 
-import com.stefandragomiroiu.rideshare.controller.exception.BadRequestException;
 import com.stefandragomiroiu.rideshare.controller.exception.ResourceAlreadyExistsException;
 import com.stefandragomiroiu.rideshare.controller.exception.ResourceNotFoundException;
+import com.stefandragomiroiu.rideshare.controller.validators.RequestValidator;
 import com.stefandragomiroiu.rideshare.repository.UserRepository;
 import com.stefandragomiroiu.rideshare.repository.VehicleRepository;
 import com.stefandragomiroiu.rideshare.tables.pojos.Vehicle;
@@ -16,15 +16,17 @@ import java.util.List;
 @RequestMapping("/vehicles")
 class VehicleController {
 
-    public static final String INVALID_USER_ERROR_MESSAGE = "Invalid user Id %s";
+    public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User %s not found";
     public static final String VEHICLE_NOT_FOUND_ERROR_MESSAGE = "Vehicle %s not found";
     public static final String VEHICLE_ALREADY_EXISTS_ERROR_MESSAGE = "Vehicle %s already exists";
 
+    private final RequestValidator<Vehicle> vehicleValidator;
     private final VehicleRepository vehicleRepository;
     private final UserRepository userRepository;
 
 
-    VehicleController(VehicleRepository vehicleRepository, UserRepository userRepository) {
+    VehicleController(RequestValidator<Vehicle> vehicleValidator, VehicleRepository vehicleRepository, UserRepository userRepository) {
+        this.vehicleValidator = vehicleValidator;
         this.vehicleRepository = vehicleRepository;
         this.userRepository = userRepository;
     }
@@ -32,8 +34,8 @@ class VehicleController {
     @GetMapping
     public List<Vehicle> findByOwner(@RequestParam Long userId) {
         if (userRepository.findOptionalById(userId).isEmpty()) {
-            String errorMessage = String.format(INVALID_USER_ERROR_MESSAGE, userId);
-            throw new BadRequestException(errorMessage);
+            String errorMessage = String.format(USER_NOT_FOUND_ERROR_MESSAGE, userId);
+            throw new ResourceNotFoundException(errorMessage);
         }
         return vehicleRepository.fetchByOwner(userId);
     }
@@ -48,10 +50,17 @@ class VehicleController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Vehicle create(@RequestBody Vehicle vehicle) {
+        vehicleValidator.validate(vehicle);
+
         if (vehicleRepository.findOptionalById(vehicle.getPlateNumber()).isPresent()) {
             String errorMessage = String.format(VEHICLE_ALREADY_EXISTS_ERROR_MESSAGE, vehicle.getPlateNumber());
             throw new ResourceAlreadyExistsException(errorMessage);
         }
+        if (userRepository.findOptionalById(vehicle.getOwner()).isEmpty()) {
+            String errorMessage = String.format(USER_NOT_FOUND_ERROR_MESSAGE, vehicle.getOwner());
+            throw new ResourceNotFoundException(errorMessage);
+        }
+
         vehicleRepository.insert(vehicle);
         return vehicle;
     }

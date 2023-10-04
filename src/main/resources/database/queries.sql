@@ -11,10 +11,10 @@ WHERE rc_dep.departure_location = 5
   AND rc_dep.departure_time < rc_arr.arrival_time
   AND DATE(rc_dep.departure_time) = '2023-06-27';
 
-select rc.connection_id, rc.price, 4 - count(bc.booking_id) as available_seats
+select rc.connection_id, rc.price, 4 - count(bc.booking_id) as available_seats -- count booking seats not id
 from ride_connection rc
          left join booking_connection bc on rc.connection_id = bc.connection_id
-where rc.ride_id = 4
+where rc.ride_id = 7
   and rc.departure_time >= '2023-06-27 19:36:43.000000'
   and rc.arrival_time <= '2023-06-27 21:36:43.000000'
 group by rc.connection_id;

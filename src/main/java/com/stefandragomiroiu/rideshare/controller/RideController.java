@@ -12,10 +12,10 @@ import java.util.List;
 @CrossOrigin()
 @RestController
 @RequestMapping("/rides")
-public class RidesController {
+public class RideController {
     private final RideService rideService;
 
-    public RidesController(RideService rideService) {
+    public RideController(RideService rideService) {
         this.rideService = rideService;
     }
 
@@ -31,8 +31,8 @@ public class RidesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody RideWithConnections rideWithConnections) {
-        rideService.create(rideWithConnections);
+    public Long create(@RequestBody RideWithConnections rideWithConnections) {
+        return rideService.create(rideWithConnections);
     }
 
 }

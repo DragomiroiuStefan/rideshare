@@ -1,14 +1,14 @@
 package com.stefandragomiroiu.rideshare.repository.dto;
 
-public class RideConnectionWithAvailableSeats {
+public class RideConnectionWithAvailableSeatsAndPrice {
     private Long connectionId;
     private Integer price;
     private Integer availableSeats;
 
-    public RideConnectionWithAvailableSeats() {
+    public RideConnectionWithAvailableSeatsAndPrice() {
     }
 
-    public RideConnectionWithAvailableSeats(Long connectionId, Integer price, Integer availableSeats) {
+    public RideConnectionWithAvailableSeatsAndPrice(Long connectionId, Integer price, Integer availableSeats) {
         this.connectionId = connectionId;
         this.price = price;
         this.availableSeats = availableSeats;

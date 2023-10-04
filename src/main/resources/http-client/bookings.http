@@ -1,0 +1,13 @@
+### Create
+POST {{host}}/bookings
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "rideId": 4,
+  "departure": 4,
+  "arrival": 4,
+  "adults": 1,
+  "children": 2,
+  "bookedAt": "2023-06-27T20:36:43.000000"
+}

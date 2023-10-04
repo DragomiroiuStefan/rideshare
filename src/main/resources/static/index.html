@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Routes Between Two Locations</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<h1>Display Routes Between Two Locations</h1>
+<form id="directionsForm">
+    <label for="departureInput">Departure:</label>
+    <input type="text" id="departureInput" required>
+
+    <label for="destinationInput">Destination:</label>
+    <input type="text" id="destinationInput" required>
+
+    <button type="submit">Get Directions</button>
+</form>
+
+<div id="map"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXMvu0dInlJmJAF9zUnykpa2S-Jw_pxZk&libraries=places&callback=initMap"
+        async defer></script>
+<script>
+    let autocompleteDeparture;
+    let autocompleteDestination;
+
+    function initMap() {
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 10,
+            center: {lat: 37.7749, lng: -122.4194}, // Default center location (San Francisco)
+        });
+        directionsRenderer.setMap(map);
+
+        autocompleteDeparture = new google.maps.places.Autocomplete(
+            document.getElementById("departureInput")
+        );
+        autocompleteDestination = new google.maps.places.Autocomplete(
+            document.getElementById("destinationInput")
+        );
+
+        document.getElementById("directionsForm").addEventListener("submit", (event) => {
+            event.preventDefault();
+            calculateAndDisplayRoute(directionsService, directionsRenderer);
+        });
+
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        const departure = document.getElementById("departureInput").value;
+        const destination = document.getElementById("destinationInput").value;
+
+        directionsService.route(
+            {
+                origin: departure,
+                destination: destination,
+                travelMode: google.maps.TravelMode.DRIVING,
+            },
+            (response, status) => {
+                if (status === "OK") {
+                    directionsRenderer.setDirections(response);
+                } else {
+                    window.alert("Directions request failed due to " + status);
+                }
+            }
+        );
+
+        // Get place details for departure
+        const departurePlace = autocompleteDeparture.getPlace();
+        const departureAddress = departurePlace.formatted_address;
+        const departureCity = getCityFromPlace(departurePlace);
+
+        // Get place details for destination
+        const destinationPlace = autocompleteDestination.getPlace();
+        const destinationAddress = destinationPlace.formatted_address;
+        const destinationCity = getCityFromPlace(destinationPlace);
+
+        // Use the extracted information as needed
+        console.log('Departure Address:', departureAddress);
+        console.log('Departure City:', departureCity);
+        console.log('Destination Address:', destinationAddress);
+        console.log('Destination City:', destinationCity);
+    }
+
+    function getCityFromPlace(place) {
+        for (const component of place.address_components) {
+            if (component.types.includes('locality') || component.types.includes('administrative_area_level_1')) {
+                return component.long_name;
+            }
+        }
+        return '';
+    }
+</script>
+</body>
+</html>

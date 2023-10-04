@@ -1,6 +1,6 @@
 package com.stefandragomiroiu.rideshare.repository;
 
-import com.stefandragomiroiu.rideshare.repository.dto.RideConnectionWithAvailableSeats;
+import com.stefandragomiroiu.rideshare.repository.dto.RideConnectionWithAvailableSeatsAndPrice;
 import com.stefandragomiroiu.rideshare.tables.daos.RideConnectionDao;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -27,7 +27,7 @@ public class RideConnectionsRepository extends RideConnectionDao {
      * Find all ride connections between departureTime and arrivalTime and return the price and available seats for each one.
      * Available seats = ride seats - bookings made on that connection.
      */
-    public List<RideConnectionWithAvailableSeats> findBy(LocalDateTime departureTime, LocalDateTime arrivalTime, Long rideId) {
+    public List<RideConnectionWithAvailableSeatsAndPrice> findBy(LocalDateTime departureTime, LocalDateTime arrivalTime, Long rideId) {
         return ctx.select(
                         RIDE_CONNECTION.CONNECTION_ID,
                         RIDE_CONNECTION.DEPARTURE_TIME,
@@ -43,7 +43,7 @@ public class RideConnectionsRepository extends RideConnectionDao {
                 .and(RIDE_CONNECTION.DEPARTURE_TIME.greaterOrEqual(departureTime))
                 .and(RIDE_CONNECTION.ARRIVAL_TIME.lessOrEqual(arrivalTime))
                 .groupBy(RIDE_CONNECTION.CONNECTION_ID)
-                .fetchInto(RideConnectionWithAvailableSeats.class);
+                .fetchInto(RideConnectionWithAvailableSeatsAndPrice.class);
     }
 
 }

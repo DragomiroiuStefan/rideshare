@@ -12,11 +12,11 @@ import static com.stefandragomiroiu.rideshare.Tables.RIDE;
 import static com.stefandragomiroiu.rideshare.Tables.RIDE_CONNECTION;
 
 @Repository
-public class RidesRepository extends RideDao {
+public class RideRepository extends RideDao {
 
     private final DSLContext ctx;
 
-    public RidesRepository(DSLContext ctx) {
+    public RideRepository(DSLContext ctx) {
         super(ctx.configuration());
         this.ctx = ctx;
     }
@@ -42,4 +42,6 @@ public class RidesRepository extends RideDao {
                 .and(RC_DEP.DEPARTURE_TIME.cast(LocalDate.class).eq(date))
                 .fetchInto(RideWithDepartureArrivalTimes.class);
     }
+
+
 }

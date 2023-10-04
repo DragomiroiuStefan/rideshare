@@ -1,3 +1,13 @@
+drop table if exists ride_rating;
+drop table if exists booking_connection;
+drop table if exists ride_connection;
+drop table if exists location;
+drop table if exists ride;
+drop table if exists vehicle;
+drop table if exists booking;
+drop table if exists "user";
+
+
 create table "user"
 (
     user_id      bigint generated always as identity primary key,
@@ -19,6 +29,7 @@ create table vehicle
     model             varchar(50) not null,
     color             varchar(50) not null,
     registration_year integer     not null,
+    seats             int         not null,
     -- picture
     owner             bigint references "user" (user_id)
 );
@@ -37,7 +48,8 @@ create table ride
     vehicle            varchar(20) references vehicle (plate_number) not null,
     seats              int                                           not null,
     additional_comment varchar(255),
-    posted_at          timestamp default now()
+    posted_at          timestamp default now(),
+    finalized          boolean
     -- traseu selectat pe harta
 );
 
@@ -70,7 +82,9 @@ create table booking
 (
     booking_id bigint generated always as identity primary key,
     user_id    bigint references "user" (user_id),
-    approved   boolean,
+    adults    int not null,
+    children    int not null,
+    confirmed  boolean,
     booked_at  timestamp default now()
 );
 

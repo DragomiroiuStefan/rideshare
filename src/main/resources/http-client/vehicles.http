@@ -10,11 +10,12 @@ POST {{host}}/vehicles
 Content-Type: application/json
 
 {
-  "plateNumber": "ABC-124",
+  "plateNumber": "ABC-126",
   "brand": "Audi",
   "model": "A3",
   "color": "Red",
-  "registrationYear":  2017,
+  "registrationYear":  2027,
+  "seats": 0,
   "owner": 1
 }
 

@@ -12,6 +12,7 @@ Content-Type: application/json
 
 {
   "driver": 1,
+  "vehicle": "ABC-123",
   "seats": 4,
   "additionalComment": "Nu se fumeaza in masina",
   "connections": [
@@ -42,18 +43,16 @@ Content-Type: application/json
 }
 
 ### Update
-PUT {{host}}/users/2
+PUT {{host}}/rides/2
 Content-Type: application/json
 
-{
-  "userId": 2,
-  "email": "seconduser@gmail.com",
-  "password": "pass",
-  "firstName": "second",
-  "lastName": "user",
-  "phoneNumber": "0722333333",
-  "birthDate": "2000-02-05"
-}
 
 ### Delete
-DELETE {{host}}/users/2
+DELETE {{host}}/rides/2
+
+### Sandbox
+POST {{host}}/sandbox
+Content-Type: application/json
+
+
+

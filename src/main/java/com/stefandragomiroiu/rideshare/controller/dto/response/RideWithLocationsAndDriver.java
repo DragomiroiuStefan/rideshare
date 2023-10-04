@@ -6,24 +6,23 @@ import java.time.LocalDateTime;
 
 public class RideWithLocationsAndDriver {
     private Long rideId;
-    private DriverAndAverageRatings driverAndAverageRatings;
     private Location departureLocation;
     private Location arrivalLocation;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private Integer price;
+    private DriverAndAverageRatings driverAndAverageRatings;
 
-    public RideWithLocationsAndDriver() {
-    }
+    public RideWithLocationsAndDriver() {}
 
-    public RideWithLocationsAndDriver(Long rideId, DriverAndAverageRatings driverAndAverageRatings, Location departureLocation, Location arrivalLocation, LocalDateTime departureTime, LocalDateTime arrivalTime, Integer price) {
+    public RideWithLocationsAndDriver(Long rideId, Location departureLocation, Location arrivalLocation, LocalDateTime departureTime, LocalDateTime arrivalTime, Integer price, DriverAndAverageRatings driverAndAverageRatings) {
         this.rideId = rideId;
-        this.driverAndAverageRatings = driverAndAverageRatings;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.price = price;
+        this.driverAndAverageRatings = driverAndAverageRatings;
     }
 
     public Long getRideId() {
@@ -32,14 +31,6 @@ public class RideWithLocationsAndDriver {
 
     public void setRideId(Long rideId) {
         this.rideId = rideId;
-    }
-
-    public DriverAndAverageRatings getDriverAndAverageRatings() {
-        return driverAndAverageRatings;
-    }
-
-    public void setDriverAndAverageRatings(DriverAndAverageRatings driverAndAverageRatings) {
-        this.driverAndAverageRatings = driverAndAverageRatings;
     }
 
     public Location getDepartureLocation() {
@@ -80,5 +71,13 @@ public class RideWithLocationsAndDriver {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public DriverAndAverageRatings getDriverAndAverageRatings() {
+        return driverAndAverageRatings;
+    }
+
+    public void setDriverAndAverageRatings(DriverAndAverageRatings driverAndAverageRatings) {
+        this.driverAndAverageRatings = driverAndAverageRatings;
     }
 }
