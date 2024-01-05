@@ -1,9 +1,9 @@
-### Find all
+### Find by id
+GET {{host}}/vehicles/ABC-124
+
+### Find by owner
 GET {{host}}/vehicles?userId=1
 Accept: application/json
-
-### Find by id
-GET {{host}}/vehicles/ABC-123
 
 ### Create
 POST {{host}}/vehicles

@@ -1,6 +1,6 @@
 package com.stefandragomiroiu.rideshare.controller;
 
-import com.stefandragomiroiu.rideshare.controller.dto.request.RideWithConnections;
+import com.stefandragomiroiu.rideshare.controller.dto.request.PublishRideDto;
 import com.stefandragomiroiu.rideshare.controller.dto.response.RideWithLocationsAndDriver;
 import com.stefandragomiroiu.rideshare.service.RideService;
 import org.springframework.http.HttpStatus;
@@ -31,8 +31,8 @@ public class RideController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@RequestBody RideWithConnections rideWithConnections) {
-        return rideService.create(rideWithConnections);
+    public Long publish(@RequestBody PublishRideDto publishrideDto) {
+        return rideService.publish(publishrideDto);
     }
 
 }

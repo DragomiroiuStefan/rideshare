@@ -1,8 +1,9 @@
 package com.stefandragomiroiu.rideshare.service;
 
-import com.stefandragomiroiu.rideshare.controller.dto.request.RideWithConnections;
+import com.stefandragomiroiu.rideshare.controller.dto.request.PublishRideDto;
 import com.stefandragomiroiu.rideshare.controller.dto.response.DriverAndAverageRatings;
 import com.stefandragomiroiu.rideshare.controller.dto.response.RideWithLocationsAndDriver;
+import com.stefandragomiroiu.rideshare.enums.RideStatus;
 import com.stefandragomiroiu.rideshare.repository.LocationRepository;
 import com.stefandragomiroiu.rideshare.repository.RideConnectionsRepository;
 import com.stefandragomiroiu.rideshare.repository.RideRepository;
@@ -98,21 +99,22 @@ public class RideService {
     }
 
     @Transactional
-    public Long create(RideWithConnections rideWithConnections) {
-        // TODO check if ride connections come one after another (1->2, 2->5 etc)
+    public Long publish(PublishRideDto publishrideDto) {
+        // TODO Validations + check if ride connections come one after another (1->2, 2->5 etc)
 
         Ride ride = new Ride(
                 null,
-                rideWithConnections.driver(),
-                rideWithConnections.vehicle(),
-                rideWithConnections.seats(),
-                rideWithConnections.additionalComment(),
-                LocalDateTime.now(),
-                false
+                publishrideDto.driver(),
+                publishrideDto.departureDate(),
+                publishrideDto.seats(),
+                publishrideDto.additionalComment(),
+                publishrideDto.vehicle(),
+                RideStatus.ACTIVE,
+                LocalDateTime.now()
         );
         rideRepository.insert(ride);
 
-        for (RideConnection rideConnection : rideWithConnections.connections()) {
+        for (RideConnection rideConnection : publishrideDto.connections()) {
             rideConnection.setRideId(ride.getRideId());
             rideConnectionsRepository.insert(rideConnection);
         }

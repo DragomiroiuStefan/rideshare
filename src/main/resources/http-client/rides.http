@@ -12,9 +12,10 @@ Content-Type: application/json
 
 {
   "driver": 1,
-  "vehicle": "ABC-123",
-  "seats": 4,
-  "additionalComment": "Nu se fumeaza in masina",
+  "departureDate": "2023-12-31",
+  "seats": 3,
+  "additionalComment": "",
+  "vehicle": "ABC-130",
   "connections": [
     {
       "departureLocation": 4,

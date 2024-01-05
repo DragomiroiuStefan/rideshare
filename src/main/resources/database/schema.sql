@@ -3,6 +3,7 @@ drop table if exists booking_connection;
 drop table if exists ride_connection;
 drop table if exists location;
 drop table if exists ride;
+drop type if exists ride_status;
 drop table if exists vehicle;
 drop table if exists booking;
 drop table if exists "user";
@@ -41,16 +42,18 @@ create table location
     county      varchar(255) not null
 );
 
+create type ride_status as enum ('ACTIVE', 'FINISHED', 'CANCELED');
+
 create table ride
 (
     ride_id            bigint generated always as identity primary key,
     driver             bigint references "user" (user_id)            not null,
-    vehicle            varchar(20) references vehicle (plate_number) not null,
+    departure_date     date                                          not null,
     seats              int                                           not null,
     additional_comment varchar(255),
-    posted_at          timestamp default now(),
-    finalized          boolean
-    -- traseu selectat pe harta
+    vehicle            varchar(20) references vehicle (plate_number) not null,
+    status             ride_status,
+    posted_at          timestamp default now()
 );
 
 create table ride_connection
@@ -82,8 +85,8 @@ create table booking
 (
     booking_id bigint generated always as identity primary key,
     user_id    bigint references "user" (user_id),
-    adults    int not null,
-    children    int not null,
+    adults     int not null,
+    children   int not null,
     confirmed  boolean,
     booked_at  timestamp default now()
 );

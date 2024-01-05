@@ -35,6 +35,13 @@ class VehicleController {
         this.userRepository = userRepository;
     }
 
+    @GetMapping("/{plateNumber}")
+    public Vehicle findById(@PathVariable String plateNumber) {
+        String errorMessage = String.format(VEHICLE_NOT_FOUND_ERROR_MESSAGE, plateNumber);
+        return vehicleRepository.findOptionalById(plateNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(errorMessage));
+    }
+
     @GetMapping
     public List<Vehicle> findByOwner(@RequestParam Long userId) {
         if (userRepository.findOptionalById(userId).isEmpty()) {
@@ -42,13 +49,6 @@ class VehicleController {
             throw new ResourceNotFoundException(errorMessage);
         }
         return vehicleRepository.fetchByOwner(userId);
-    }
-
-    @GetMapping("/{plateNumber}")
-    public Vehicle findById(@PathVariable String plateNumber) {
-        String errorMessage = String.format(VEHICLE_NOT_FOUND_ERROR_MESSAGE, plateNumber);
-        return vehicleRepository.findOptionalById(plateNumber)
-                .orElseThrow(() -> new ResourceNotFoundException(errorMessage));
     }
 
     /**

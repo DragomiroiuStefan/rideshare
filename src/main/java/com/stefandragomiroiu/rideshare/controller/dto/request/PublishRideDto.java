@@ -2,16 +2,17 @@ package com.stefandragomiroiu.rideshare.controller.dto.request;
 
 import com.stefandragomiroiu.rideshare.tables.pojos.RideConnection;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record RideWithConnections(
-        Long rideId,
+public record PublishRideDto(
         Long driver,
-        String vehicle,
+        LocalDate departureDate,
         Integer seats,
         String additionalComment,
-        LocalDateTime postedAt,
+        String vehicle,
+        String status,
         List<RideConnection> connections
         ) {
 }
