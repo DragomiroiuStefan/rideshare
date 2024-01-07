@@ -34,4 +34,11 @@ public class UserRepository extends UserDao {
                 .fetchOneInto(DriverRating.class);
 
     }
+
+    public void setProfilePicture(Long userId, String profilePicture) {
+        ctx.update(USER)
+                .set(USER.PROFILE_PICTURE, profilePicture)
+                .where(USER.USER_ID.eq(userId))
+                .execute();
+    }
 }

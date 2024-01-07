@@ -11,16 +11,16 @@ drop table if exists "user";
 
 create table "user"
 (
-    user_id      bigint generated always as identity primary key,
-    email        varchar(255) unique not null,
-    password     varchar(50)         not null,
-    first_name   varchar(255)        not null,
-    last_name    varchar(255)        not null,
-    phone_number varchar(15),
-    birth_date   date                not null,
-    created_on   timestamp default now(),
-    last_login   timestamp
-    -- profile_picture
+    user_id         bigint generated always as identity primary key,
+    email           varchar(255) unique not null,
+    password        varchar(50)         not null,
+    first_name      varchar(255)        not null,
+    last_name       varchar(255)        not null,
+    phone_number    varchar(15),
+    birth_date      date                not null,
+    created_on      timestamp default now(),
+    last_login      timestamp,
+    profile_picture varchar(64)
 );
 
 create table vehicle
