@@ -7,7 +7,9 @@ drop type if exists ride_status;
 drop table if exists vehicle;
 drop table if exists booking;
 drop table if exists "user";
+drop type if exists role;
 
+create type role as enum ('USER', 'ADMIN');
 
 create table "user"
 (
@@ -18,9 +20,10 @@ create table "user"
     last_name       varchar(255)        not null,
     phone_number    varchar(15),
     birth_date      date                not null,
+    profile_picture varchar(64),
     created_on      timestamp default now(),
     last_login      timestamp,
-    profile_picture varchar(64)
+    role            role
 );
 
 create table vehicle

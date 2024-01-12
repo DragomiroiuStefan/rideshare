@@ -4,6 +4,7 @@ import com.stefandragomiroiu.rideshare.repository.dto.DriverRating;
 import com.stefandragomiroiu.rideshare.tables.daos.UserDao;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.stefandragomiroiu.rideshare.Tables.*;
 import static org.jooq.impl.DSL.avg;
@@ -35,6 +36,7 @@ public class UserRepository extends UserDao {
 
     }
 
+    @Transactional
     public void setProfilePicture(Long userId, String profilePicture) {
         ctx.update(USER)
                 .set(USER.PROFILE_PICTURE, profilePicture)
