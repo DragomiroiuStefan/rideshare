@@ -1,6 +1,6 @@
 package com.stefandragomiroiu.rideshare.config.security;
 
-import com.stefandragomiroiu.rideshare.enums.Role;
+import com.stefandragomiroiu.rideshare.jooq.enums.Role;
 
 import java.util.Map;
 import java.util.Optional;

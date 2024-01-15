@@ -1,15 +1,15 @@
 package com.stefandragomiroiu.rideshare.repository;
 
 import com.stefandragomiroiu.rideshare.repository.dto.RideConnectionWithAvailableSeatsAndPrice;
-import com.stefandragomiroiu.rideshare.tables.daos.RideConnectionDao;
+import com.stefandragomiroiu.rideshare.jooq.tables.daos.RideConnectionDao;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.stefandragomiroiu.rideshare.Tables.BOOKING_CONNECTION;
-import static com.stefandragomiroiu.rideshare.Tables.RIDE_CONNECTION;
+import static com.stefandragomiroiu.rideshare.jooq.Tables.BOOKING_CONNECTION;
+import static com.stefandragomiroiu.rideshare.jooq.Tables.RIDE_CONNECTION;
 import static org.jooq.impl.DSL.val;
 
 @Repository

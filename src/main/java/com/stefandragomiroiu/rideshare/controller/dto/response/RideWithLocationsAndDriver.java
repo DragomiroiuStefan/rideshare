@@ -1,6 +1,6 @@
 package com.stefandragomiroiu.rideshare.controller.dto.response;
 
-import com.stefandragomiroiu.rideshare.tables.pojos.Location;
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.Location;
 
 import java.time.LocalDateTime;
 

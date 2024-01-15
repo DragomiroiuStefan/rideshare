@@ -5,7 +5,7 @@ import com.stefandragomiroiu.rideshare.controller.exception.ResourceNotFoundExce
 import com.stefandragomiroiu.rideshare.controller.validators.RequestValidator;
 import com.stefandragomiroiu.rideshare.repository.UserRepository;
 import com.stefandragomiroiu.rideshare.repository.VehicleRepository;
-import com.stefandragomiroiu.rideshare.tables.pojos.Vehicle;
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.Vehicle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

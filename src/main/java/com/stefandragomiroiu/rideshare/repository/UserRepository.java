@@ -1,12 +1,12 @@
 package com.stefandragomiroiu.rideshare.repository;
 
 import com.stefandragomiroiu.rideshare.repository.dto.DriverRating;
-import com.stefandragomiroiu.rideshare.tables.daos.UserDao;
+import com.stefandragomiroiu.rideshare.jooq.tables.daos.UserDao;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.stefandragomiroiu.rideshare.Tables.*;
+import static com.stefandragomiroiu.rideshare.jooq.Tables.*;
 import static org.jooq.impl.DSL.avg;
 
 @Repository

@@ -67,24 +67,24 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>target/generated-sources/jooq</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>build-helper-maven-plugin</artifactId>-->
+<!--                <version>3.0.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>add-source</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <sources>-->
+<!--                                <source>target/generated-sources/jooq</source>-->
+<!--                            </sources>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
@@ -96,6 +96,8 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <!-- Use manual code generation and check in generated sources in version control -->
+                            <skip>true</skip>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
                                 <!--suppress UnresolvedMavenProperty -->
@@ -124,8 +126,8 @@
                                     <springDao>true</springDao>
                                 </generate>
                                 <target>
-                                    <packageName>com.stefandragomiroiu.rideshare</packageName>
-                                    <directory>target/generated-sources/jooq</directory>
+                                    <packageName>com.stefandragomiroiu.rideshare.jooq</packageName>
+                                    <directory>src/main/java</directory>
                                 </target>
                             </generator>
                         </configuration>

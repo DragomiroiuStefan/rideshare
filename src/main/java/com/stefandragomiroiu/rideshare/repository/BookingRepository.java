@@ -1,6 +1,6 @@
 package com.stefandragomiroiu.rideshare.repository;
 
-import com.stefandragomiroiu.rideshare.tables.daos.BookingDao;
+import com.stefandragomiroiu.rideshare.jooq.tables.daos.BookingDao;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 

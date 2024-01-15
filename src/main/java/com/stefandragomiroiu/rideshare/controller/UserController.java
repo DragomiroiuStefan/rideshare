@@ -2,10 +2,10 @@ package com.stefandragomiroiu.rideshare.controller;
 
 import com.stefandragomiroiu.rideshare.config.security.EmailAndPassword;
 import com.stefandragomiroiu.rideshare.controller.exception.*;
-import com.stefandragomiroiu.rideshare.enums.Role;
+import com.stefandragomiroiu.rideshare.jooq.enums.Role;
 import com.stefandragomiroiu.rideshare.repository.UserRepository;
 import com.stefandragomiroiu.rideshare.service.AuthService;
-import com.stefandragomiroiu.rideshare.tables.pojos.User;
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.User;
 import com.stefandragomiroiu.rideshare.util.FileUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

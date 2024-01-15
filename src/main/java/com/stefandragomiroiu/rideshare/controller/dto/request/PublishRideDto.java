@@ -1,9 +1,8 @@
 package com.stefandragomiroiu.rideshare.controller.dto.request;
 
-import com.stefandragomiroiu.rideshare.tables.pojos.RideConnection;
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.RideConnection;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public record PublishRideDto(
@@ -14,5 +13,5 @@ public record PublishRideDto(
         String vehicle,
         String status,
         List<RideConnection> connections
-        ) {
+) {
 }

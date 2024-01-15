@@ -1,8 +1,8 @@
 package com.stefandragomiroiu.rideshare.config.security;
 
-import com.stefandragomiroiu.rideshare.enums.Role;
+import com.stefandragomiroiu.rideshare.jooq.enums.Role;
 import com.stefandragomiroiu.rideshare.service.AuthService;
-import com.stefandragomiroiu.rideshare.tables.pojos.User;
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpFilter;

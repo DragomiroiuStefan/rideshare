@@ -3,7 +3,7 @@ package com.stefandragomiroiu.rideshare.controller.validators;
 import am.ik.yavi.builder.ValidatorBuilder;
 import am.ik.yavi.core.Constraint;
 import am.ik.yavi.core.Validator;
-import com.stefandragomiroiu.rideshare.tables.pojos.Vehicle;
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.Vehicle;
 import org.springframework.stereotype.Component;
 
 import java.time.Year;
