@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 ### Delete
-DELETE {{host}}/users/3
+DELETE {{host}}/users/7
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDQ4OTc0MTYsImlzcyI6Ind3dy5yaWRlc2hhcmUucGFnZXMuZGV2Iiwic3ViIjoiMyIsImVtYWlsIjoidXNlckBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4ifQ.O8cV1TPvU3Lf0rKSd9fcrozmHzgpBNSF7MHcYlaAvOU
 
 ### Login
