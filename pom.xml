@@ -80,9 +80,9 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://localhost:5432/ride_share</url>
-                                <user>stefan</user>
-                                <password>stefan</password>
+                                <url>jdbc:postgresql://roundhouse.proxy.rlwy.net:58539/railway</url>
+                                <user>postgres</user>
+                                <password>Ed4256CB6A1D-6ecG1fccA-GAbF-11*4</password>
                             </jdbc>
                             <generator>
                                 <database>

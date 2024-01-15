@@ -20,8 +20,7 @@ import java.time.ZonedDateTime;
 @Service
 public class AuthService {
 
-    @Value("${jwt.secret.key}")
-    private String jwtSecretKey;
+    private final String jwtSecretKey = "4BqHPHxribtwRxqjWcJU8wYQ7za86CSH4jmngPPjifFrBc4NXiXXSJgLaiCrL8EtBExFjevg5BRfhzCdaSTXeKD8bFdz6zaJzWz4uNvcLTZT6mE9hrmd4CUQxkvA5jjeCtqunHxJTzQxEr7tJ8x2dt";
 
     public String createJWT(User user) {
         // Build an HMAC signer using an SHA-256 hash
