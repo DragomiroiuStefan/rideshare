@@ -2,7 +2,7 @@
 GET {{host}}/users
 
 ### Find by id
-GET {{host}}/users/3
+GET {{host}}/users/4
 
 ### Create
 POST {{host}}/users
