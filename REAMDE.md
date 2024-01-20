@@ -2,9 +2,10 @@
 
 ## TODO
 
+- write readme
+- fix postgresql deploy
+- jwt set expiration, move key in environment variables
 - doar dataview my rides (ca la uber, apare cursa canceled) sau si dataview cu bookings
-- exception handling for POST: service method throws IllegalArg (example driver userId not found) -> controller throws Bad request
-- put app on docker
 - wireframes, redo requirements, flowcharts in excalidraw 
 - change count(bc.booking_id) in queries to count(b.adults + b.children)
 - bookings with approval
@@ -21,7 +22,6 @@
 - actuator
 - internationalization
 - maps integration
-- write readme
 - see fmi document
 - remove hardcoded properties in jooq plugin pom.xml
 - transactions

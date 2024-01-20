@@ -1,0 +1,22 @@
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+
+  rideshare-server:
+    image: rideshare:0.0.1-SNAPSHOT
+    pull_policy: if_not_present
+    restart: always
+    ports:
+      - "8080:8080"
+    # TODO networking
+
+volumes:
+  pgdata:
