@@ -27,6 +27,9 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User %s not found";
+    public static final String USER_ALREADY_EXISTS_ERROR_MESSAGE = "User %s already exists";
+
     private final UserRepository userRepository;
     private final AuthService authService;
 
@@ -40,10 +43,12 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public User findById(@PathVariable long id) {
-        return userRepository.findOptionalById(id)
-                .orElseThrow(ResourceNotFoundException::new);
+    @GetMapping("/{userId}")
+    public User findById(@PathVariable Long userId) {
+        return userRepository.findOptionalById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format(USER_NOT_FOUND_ERROR_MESSAGE, userId)
+                ));
     }
 
     @PostMapping
@@ -52,22 +57,28 @@ public class UserController {
         userRepository.insert(user);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable long id, @RequestBody User user) {
-        if (userRepository.findOptionalById(id).isEmpty()) {
-            throw new ResourceNotFoundException();
+    public void updateProfileInfo(@PathVariable long userId, @RequestBody User user, HttpServletResponse response) {
+        if (userRepository.findOptionalById(userId).isEmpty()) {
+            throw new ResourceNotFoundException(String.format(USER_NOT_FOUND_ERROR_MESSAGE, userId));
         }
-        userRepository.update(user);
+
+        userRepository.updateProfileInfo(user);
+        User savedUser = userRepository.findById(userId);
+
+        String jwt = authService.createJWT(savedUser);
+        response.addHeader(HttpHeaders.AUTHORIZATION, jwt);
+        response.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.AUTHORIZATION);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable long id) {
-        if (userRepository.findOptionalById(id).isEmpty()) {
-            throw new ResourceNotFoundException();
+    public void delete(@PathVariable Long userId) {
+        if (userRepository.findOptionalById(userId).isEmpty()) {
+            throw new ResourceNotFoundException(String.format(USER_NOT_FOUND_ERROR_MESSAGE, userId));
         }
-        userRepository.deleteById(id);
+        userRepository.deleteById(userId);
     }
 
     @PostMapping("/login")

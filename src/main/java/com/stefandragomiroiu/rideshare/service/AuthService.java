@@ -1,7 +1,5 @@
 package com.stefandragomiroiu.rideshare.service;
 
-import com.stefandragomiroiu.rideshare.controller.UserController;
-import com.stefandragomiroiu.rideshare.controller.exception.InvalidCredentialsException;
 import com.stefandragomiroiu.rideshare.jooq.enums.Role;
 import com.stefandragomiroiu.rideshare.jooq.tables.pojos.User;
 import io.fusionauth.jwt.Signer;
@@ -9,9 +7,6 @@ import io.fusionauth.jwt.Verifier;
 import io.fusionauth.jwt.domain.JWT;
 import io.fusionauth.jwt.hmac.HMACSigner;
 import io.fusionauth.jwt.hmac.HMACVerifier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneOffset;

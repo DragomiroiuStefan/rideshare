@@ -37,9 +37,10 @@ class VehicleController {
 
     @GetMapping("/{plateNumber}")
     public Vehicle findById(@PathVariable String plateNumber) {
-        String errorMessage = String.format(VEHICLE_NOT_FOUND_ERROR_MESSAGE, plateNumber);
         return vehicleRepository.findOptionalById(plateNumber)
-                .orElseThrow(() -> new ResourceNotFoundException(errorMessage));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format(VEHICLE_NOT_FOUND_ERROR_MESSAGE, plateNumber)
+                ));
     }
 
     @GetMapping
@@ -61,20 +62,15 @@ class VehicleController {
     public Vehicle create(@RequestBody Vehicle vehicle) {
         logger.info("Create vehicle request: {}", vehicle);
         vehicleValidator.validate(vehicle);
-
         if (vehicleRepository.findOptionalById(vehicle.getPlateNumber()).isPresent()) {
             String errorMessage = String.format(VEHICLE_ALREADY_EXISTS_ERROR_MESSAGE, vehicle.getPlateNumber());
             throw new ResourceAlreadyExistsException(errorMessage);
         }
-
         if (userRepository.findOptionalById(vehicle.getOwner()).isEmpty()) {
             String errorMessage = String.format(USER_NOT_FOUND_ERROR_MESSAGE, vehicle.getOwner());
             throw new ResourceNotFoundException(errorMessage);
         }
-
         vehicleRepository.insert(vehicle);
-
-
         return vehicle;
     }
 

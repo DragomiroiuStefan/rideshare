@@ -1,5 +1,6 @@
 package com.stefandragomiroiu.rideshare.repository;
 
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.User;
 import com.stefandragomiroiu.rideshare.repository.dto.DriverRating;
 import com.stefandragomiroiu.rideshare.jooq.tables.daos.UserDao;
 import org.jooq.DSLContext;
@@ -41,6 +42,18 @@ public class UserRepository extends UserDao {
         ctx.update(USER)
                 .set(USER.PROFILE_PICTURE, profilePicture)
                 .where(USER.USER_ID.eq(userId))
+                .execute();
+    }
+
+    @Transactional
+    public void updateProfileInfo(User user) {
+        ctx.update(USER)
+                .set(USER.FIRST_NAME, user.getFirstName())
+                .set(USER.LAST_NAME, user.getLastName())
+                .set(USER.BIRTH_DATE, user.getBirthDate())
+                .set(USER.EMAIL, user.getEmail())
+                .set(USER.PHONE_NUMBER, user.getPhoneNumber())
+                .where(USER.USER_ID.eq(user.getUserId()))
                 .execute();
     }
 }

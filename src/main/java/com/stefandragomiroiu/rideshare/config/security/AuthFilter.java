@@ -32,16 +32,18 @@ public class AuthFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        Optional<Role> role = ProtectedEndpointsConfig.matches(request.getMethod(), request.getRequestURI());
+        Optional<Role> role = ProtectedEndpoints.matches(request.getMethod(), request.getRequestURI());
+
+        // Resource does not require authentication or authorization
         if (role.isEmpty()) {
             chain.doFilter(request, response);
             return;
         }
 
-        // Get authorization header and validate
+        // Get authorization header
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (isEmpty(header) || !header.startsWith("Bearer ")) {
-            logger.error("Authentication failed for {} {} endpoint : JWT missing.", request.getMethod(), request.getRequestURI());
+            logger.error("Authentication failed for {} {} : JWT missing.", request.getMethod(), request.getRequestURI());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // HTTP 401
             return;
         }

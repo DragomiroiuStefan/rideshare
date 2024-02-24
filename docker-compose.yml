@@ -10,13 +10,14 @@ services:
     volumes:
     - pgdata:/var/lib/postgresql/data
 
-  rideshare-server:
-    image: rideshare:0.0.1-SNAPSHOT
-    pull_policy: if_not_present
-    restart: always
-    ports:
-      - "8080:8080"
-    # TODO networking
+#  rideshare-server:
+#    image: rideshare:0.0.1-SNAPSHOT
+#    pull_policy: if_not_present
+#    restart: always
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - postgres
 
 volumes:
   pgdata:

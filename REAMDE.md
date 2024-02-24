@@ -10,7 +10,6 @@
 - change count(bc.booking_id) in queries to count(b.adults + b.children)
 - bookings with approval
 - classes and methods javadoc
-- flowcharts
 - rest exceptions handling
 - validation
 - rest documentation
