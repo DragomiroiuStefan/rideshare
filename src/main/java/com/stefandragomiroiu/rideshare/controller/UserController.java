@@ -1,18 +1,21 @@
 package com.stefandragomiroiu.rideshare.controller;
 
 import com.stefandragomiroiu.rideshare.config.security.EmailAndPassword;
-import com.stefandragomiroiu.rideshare.controller.exception.*;
+import com.stefandragomiroiu.rideshare.controller.exception.BadRequestException;
+import com.stefandragomiroiu.rideshare.controller.exception.EmailALreadyUsedException;
+import com.stefandragomiroiu.rideshare.controller.exception.InvalidCredentialsException;
+import com.stefandragomiroiu.rideshare.controller.exception.ResourceNotFoundException;
 import com.stefandragomiroiu.rideshare.jooq.enums.Role;
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.User;
 import com.stefandragomiroiu.rideshare.repository.UserRepository;
 import com.stefandragomiroiu.rideshare.service.AuthService;
-import com.stefandragomiroiu.rideshare.jooq.tables.pojos.User;
 import com.stefandragomiroiu.rideshare.util.FileUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +32,9 @@ public class UserController {
 
     public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User %s not found";
     public static final String USER_ALREADY_EXISTS_ERROR_MESSAGE = "User %s already exists";
+
+    @Value("${user.upload.dir}")
+    private String userUploadDir;
 
     private final UserRepository userRepository;
     private final AuthService authService;
@@ -114,12 +120,18 @@ public class UserController {
     @PostMapping("/uploadProfilePicture")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestParam("profilePicture") MultipartFile profilePicture) throws IOException {
-        String fileName = StringUtils.cleanPath(profilePicture.getOriginalFilename());
-        var userId = 1L;
-        String uploadDir = "public/user-upload/" + userId;
+        if (profilePicture == null || profilePicture.getOriginalFilename() == null) {
+            throw new BadRequestException("Missing upload file");
+        }
+
+        String fileExtension = FileUtil.getFileExtension(profilePicture.getOriginalFilename())
+                .orElseThrow(() -> new BadRequestException("invalid File Extension"));
+        String fileName = "profile-picture." + fileExtension;
+        var userId = 1L; //TODO
+        String uploadDir = userUploadDir + userId;
 
         FileUtil.saveFile(uploadDir, fileName, profilePicture);
-//        userRepository.setProfilePicture(userId, fileName);
+        userRepository.setProfilePicture(userId, fileName);
 
         logger.info("User {} uploaded profile picture {} to {}", userId, fileName, uploadDir);
     }

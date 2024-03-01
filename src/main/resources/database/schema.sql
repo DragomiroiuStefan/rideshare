@@ -34,8 +34,8 @@ create table vehicle
     color             varchar(50) not null,
     registration_year integer     not null,
     seats             int         not null,
-    -- picture
-    owner             bigint references "user" (user_id)
+    owner             bigint references "user" (user_id),
+    image             varchar(64)
 );
 
 create table location

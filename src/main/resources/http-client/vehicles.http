@@ -2,7 +2,7 @@
 GET {{host}}/vehicles/ABC-124
 
 ### Find by owner
-GET {{host}}/vehicles?userId=1
+GET {{host}}/vehicles?userId=4
 Accept: application/json
 
 ### Create

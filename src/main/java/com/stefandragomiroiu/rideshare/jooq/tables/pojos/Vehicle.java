@@ -22,6 +22,7 @@ public class Vehicle implements Serializable {
     private Integer registrationYear;
     private Integer seats;
     private Long owner;
+    private String image;
 
     public Vehicle() {}
 
@@ -33,6 +34,7 @@ public class Vehicle implements Serializable {
         this.registrationYear = value.registrationYear;
         this.seats = value.seats;
         this.owner = value.owner;
+        this.image = value.image;
     }
 
     public Vehicle(
@@ -42,7 +44,8 @@ public class Vehicle implements Serializable {
         String color,
         Integer registrationYear,
         Integer seats,
-        Long owner
+        Long owner,
+        String image
     ) {
         this.plateNumber = plateNumber;
         this.brand = brand;
@@ -51,6 +54,7 @@ public class Vehicle implements Serializable {
         this.registrationYear = registrationYear;
         this.seats = seats;
         this.owner = owner;
+        this.image = image;
     }
 
     /**
@@ -151,6 +155,20 @@ public class Vehicle implements Serializable {
         this.owner = owner;
     }
 
+    /**
+     * Getter for <code>public.vehicle.image</code>.
+     */
+    public String getImage() {
+        return this.image;
+    }
+
+    /**
+     * Setter for <code>public.vehicle.image</code>.
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -202,6 +220,12 @@ public class Vehicle implements Serializable {
         }
         else if (!this.owner.equals(other.owner))
             return false;
+        if (this.image == null) {
+            if (other.image != null)
+                return false;
+        }
+        else if (!this.image.equals(other.image))
+            return false;
         return true;
     }
 
@@ -216,6 +240,7 @@ public class Vehicle implements Serializable {
         result = prime * result + ((this.registrationYear == null) ? 0 : this.registrationYear.hashCode());
         result = prime * result + ((this.seats == null) ? 0 : this.seats.hashCode());
         result = prime * result + ((this.owner == null) ? 0 : this.owner.hashCode());
+        result = prime * result + ((this.image == null) ? 0 : this.image.hashCode());
         return result;
     }
 
@@ -230,6 +255,7 @@ public class Vehicle implements Serializable {
         sb.append(", ").append(registrationYear);
         sb.append(", ").append(seats);
         sb.append(", ").append(owner);
+        sb.append(", ").append(image);
 
         sb.append(")");
         return sb.toString();

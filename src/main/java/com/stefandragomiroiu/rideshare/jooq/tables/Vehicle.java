@@ -14,11 +14,11 @@ import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function7;
+import org.jooq.Function8;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row7;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -85,6 +85,11 @@ public class Vehicle extends TableImpl<VehicleRecord> {
      * The column <code>public.vehicle.owner</code>.
      */
     public final TableField<VehicleRecord, Long> OWNER = createField(DSL.name("owner"), SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>public.vehicle.image</code>.
+     */
+    public final TableField<VehicleRecord, String> IMAGE = createField(DSL.name("image"), SQLDataType.VARCHAR(64), this, "");
 
     private Vehicle(Name alias, Table<VehicleRecord> aliased) {
         this(alias, aliased, null);
@@ -186,18 +191,18 @@ public class Vehicle extends TableImpl<VehicleRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<String, String, String, String, Integer, Integer, Long> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row8<String, String, String, String, Integer, Integer, Long, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function7<? super String, ? super String, ? super String, ? super String, ? super Integer, ? super Integer, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function8<? super String, ? super String, ? super String, ? super String, ? super Integer, ? super Integer, ? super Long, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -205,7 +210,7 @@ public class Vehicle extends TableImpl<VehicleRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function7<? super String, ? super String, ? super String, ? super String, ? super Integer, ? super Integer, ? super Long, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super String, ? super String, ? super String, ? super String, ? super Integer, ? super Integer, ? super Long, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

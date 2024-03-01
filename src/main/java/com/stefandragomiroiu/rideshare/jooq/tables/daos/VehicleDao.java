@@ -161,4 +161,19 @@ public class VehicleDao extends AbstractSpringDAOImpl<VehicleRecord, com.stefand
     public List<com.stefandragomiroiu.rideshare.jooq.tables.pojos.Vehicle> fetchByOwner(Long... values) {
         return fetch(Vehicle.VEHICLE.OWNER, values);
     }
+
+    /**
+     * Fetch records that have <code>image BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.stefandragomiroiu.rideshare.jooq.tables.pojos.Vehicle> fetchRangeOfImage(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Vehicle.VEHICLE.IMAGE, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>image IN (values)</code>
+     */
+    public List<com.stefandragomiroiu.rideshare.jooq.tables.pojos.Vehicle> fetchByImage(String... values) {
+        return fetch(Vehicle.VEHICLE.IMAGE, values);
+    }
 }
