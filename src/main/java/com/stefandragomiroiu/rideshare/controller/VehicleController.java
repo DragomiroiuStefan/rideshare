@@ -4,10 +4,9 @@ import com.stefandragomiroiu.rideshare.controller.dto.request.VehicleFormData;
 import com.stefandragomiroiu.rideshare.controller.exception.BadRequestException;
 import com.stefandragomiroiu.rideshare.controller.exception.ResourceAlreadyExistsException;
 import com.stefandragomiroiu.rideshare.controller.exception.ResourceNotFoundException;
-import com.stefandragomiroiu.rideshare.controller.validators.RequestValidator;
+import com.stefandragomiroiu.rideshare.jooq.tables.pojos.Vehicle;
 import com.stefandragomiroiu.rideshare.repository.UserRepository;
 import com.stefandragomiroiu.rideshare.repository.VehicleRepository;
-import com.stefandragomiroiu.rideshare.jooq.tables.pojos.Vehicle;
 import com.stefandragomiroiu.rideshare.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,13 +34,11 @@ class VehicleController {
     @Value("${user.upload.dir}")
     private String userUploadDir;
 
-    private final RequestValidator<Vehicle> vehicleValidator;
     private final VehicleRepository vehicleRepository;
     private final UserRepository userRepository;
 
 
-    VehicleController(RequestValidator<Vehicle> vehicleValidator, VehicleRepository vehicleRepository, UserRepository userRepository) {
-        this.vehicleValidator = vehicleValidator;
+    VehicleController(VehicleRepository vehicleRepository, UserRepository userRepository) {
         this.vehicleRepository = vehicleRepository;
         this.userRepository = userRepository;
     }
@@ -65,14 +62,14 @@ class VehicleController {
 
     /**
      * {@code POST  /vehicle} : Create a new vehicle.
+     *
      * @return {@code 201 (Created)} with created vehicle in response body or {@code 409 (conflict)} if vehicle id already exists or {@code 404 (Not Found)} if vehicle owner doesn't exist
      */
-    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public Vehicle create(@ModelAttribute VehicleFormData vehicleFormData) {
         var vehicle = map(vehicleFormData);
         logger.info("Create vehicle request: {}", vehicle);
-        vehicleValidator.validate(vehicle);
         if (vehicleRepository.findOptionalById(vehicle.getPlateNumber()).isPresent()) {
             String errorMessage = String.format(VEHICLE_ALREADY_EXISTS_ERROR_MESSAGE, vehicle.getPlateNumber());
             throw new ResourceAlreadyExistsException(errorMessage);
@@ -90,7 +87,7 @@ class VehicleController {
         return vehicle;
     }
 
-    private String saveImage(VehicleFormData vehicleFormData)  {
+    private String saveImage(VehicleFormData vehicleFormData) {
         MultipartFile image = vehicleFormData.getImage();
         if (image == null || image.getOriginalFilename() == null) {
             throw new BadRequestException("Missing upload file");
@@ -108,7 +105,7 @@ class VehicleController {
         }
 
         logger.info("User {} uploaded profile picture {} to {}", vehicleFormData.getOwner(), fileName, uploadDir);
-        return  fileName;
+        return fileName;
     }
 
     @PutMapping("/{plateNumber}")

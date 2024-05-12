@@ -1,6 +1,6 @@
 package com.stefandragomiroiu.rideshare.repository;
 
-import com.stefandragomiroiu.rideshare.repository.dto.RideWithDepartureArrivalTimes;
+import com.stefandragomiroiu.rideshare.repository.projection.RideWithDepartureArrivalTimes;
 import com.stefandragomiroiu.rideshare.jooq.tables.daos.RideDao;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;

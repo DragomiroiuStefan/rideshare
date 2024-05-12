@@ -1,4 +1,4 @@
-package com.stefandragomiroiu.rideshare.repository.dto;
+package com.stefandragomiroiu.rideshare.repository.projection;
 
 import java.time.LocalDateTime;
 

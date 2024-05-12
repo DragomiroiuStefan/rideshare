@@ -1,6 +1,6 @@
 package com.stefandragomiroiu.rideshare.repository;
 
-import com.stefandragomiroiu.rideshare.repository.dto.RideConnectionWithAvailableSeatsAndPrice;
+import com.stefandragomiroiu.rideshare.repository.projection.RideConnectionWithAvailableSeatsAndPrice;
 import com.stefandragomiroiu.rideshare.jooq.tables.daos.RideConnectionDao;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;

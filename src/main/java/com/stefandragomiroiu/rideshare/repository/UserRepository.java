@@ -1,7 +1,7 @@
 package com.stefandragomiroiu.rideshare.repository;
 
 import com.stefandragomiroiu.rideshare.jooq.tables.pojos.User;
-import com.stefandragomiroiu.rideshare.repository.dto.DriverRating;
+import com.stefandragomiroiu.rideshare.repository.projection.DriverRating;
 import com.stefandragomiroiu.rideshare.jooq.tables.daos.UserDao;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;

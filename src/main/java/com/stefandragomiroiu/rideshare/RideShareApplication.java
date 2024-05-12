@@ -4,7 +4,6 @@ import com.stefandragomiroiu.rideshare.config.ExceptionTranslator;
 import org.jooq.impl.DataSourceConnectionProvider;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultExecuteListenerProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +14,11 @@ import javax.sql.DataSource;
 @SpringBootApplication
 public class RideShareApplication {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
+
+    public RideShareApplication(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(RideShareApplication.class, args);
