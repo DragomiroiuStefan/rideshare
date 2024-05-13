@@ -9,17 +9,17 @@ POST {{host}}/locations
 Content-Type: application/json
 
 {
-  "city": "Draga",
+  "city": "Draga6",
   "county": "VL"
 }
 
 ### Update
-PUT {{host}}/locations/1
+PUT {{host}}/locations/5
 Content-Type: application/json
 
 {
-  "locationId": 1,
-  "city": "Dragasani",
+  "locationId": 5,
+  "city": "Draga 5",
   "county": "VL"
 }
 
