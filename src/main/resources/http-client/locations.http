@@ -1,6 +1,9 @@
 ### Find all
 GET {{host}}/locations
 
+###  Find by City Containing
+GET {{host}}/locations/findByCityContaining?city=dra
+
 ### Find by id
 GET {{host}}/locations/2
 
